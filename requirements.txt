@@ -1,6 +1,11 @@
-# Versiones verificadas en local. El CSS de theme.py depende de atributos
-# data-testid de Streamlit, que cambian entre versiones: no actualices
-# Streamlit sin revisar la sección 1 de theme.py.
+# Streamlit Community Cloud corre Python 3.10 por defecto.
+# NumPy 2.3+ exige Python >=3.11, por eso se fija la última serie 2.2.
+# Si subes el entorno a Python 3.12 (Settings > General > Python version),
+# puedes pasar a numpy>=2.3 sin problema.
+
 streamlit==1.63.0
-numpy==2.4.4
+numpy==2.2.6
 plotly==7.0.0
+
+# Si AI_Apps.py ya usaba otras librerías (pandas, xarray, scikit-learn...),
+# agrégalas aquí: este archivo reemplaza al anterior, no lo complementa.
