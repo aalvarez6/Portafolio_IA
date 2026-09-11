@@ -1,0 +1,19 @@
+# Ubicación: .streamlit/config.toml (en la raíz del repo, junto a app.py)
+#
+# Estos tokens no reemplazan el CSS de theme.py. Sirven para que la primera
+# pintura ya salga con tus colores, en vez de mostrar el tema por defecto de
+# Streamlit durante un instante antes de que cargue el CSS.
+
+[theme]
+base = "light"
+primaryColor = "#0B63CE"
+backgroundColor = "#FBFBFD"
+secondaryBackgroundColor = "#FFFFFF"
+textColor = "#1D1D1F"
+font = "sans serif"
+
+[client]
+toolbarMode = "minimal"
+# En true mientras depuras: sin esto, un error en la nube aparece como
+# mensaje genérico y te quedas sin traceback. Cambiar a false al publicar.
+showErrorDetails = true
