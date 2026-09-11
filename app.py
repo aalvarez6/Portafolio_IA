@@ -3,7 +3,7 @@ Entrypoint del portafolio.
 
 Las rutas se resuelven contra la ubicación de ESTE archivo, no contra el
 directorio de trabajo. En local suelen coincidir; en Streamlit Cloud no
-siempre, y ahí es donde aparece StreamlitPageNotFoundError.
+siempre, y ahí aparece StreamlitPageNotFoundError.
 """
 
 from pathlib import Path
@@ -11,7 +11,7 @@ from pathlib import Path
 import streamlit as st
 
 st.set_page_config(
-    page_title="Valeria · Pronóstico atmosférico",
+    page_title="Alejandra Álvarez · Ingeniería eléctrica e IA",
     page_icon="◔",
     layout="wide",                    # el ancho real lo fija el CSS, no Streamlit
     initial_sidebar_state="collapsed",
@@ -25,14 +25,13 @@ VISTAS = RAIZ / "views"
 
 DEFINICION = [
     ("inicio.py", "Inicio", "inicio", True),
-    ("ensamble.py", "Ensamble WRF", "ensamble", False),
 ]
 
 faltantes = [f for f, *_ in DEFINICION if not (VISTAS / f).is_file()]
 
 if faltantes:
-    # Falla ruidosa y útil: en la nube no tienes terminal para hacer `ls`,
-    # así que la app misma reporta qué archivos llegaron al repo.
+    # Falla ruidosa y útil: en la nube no hay terminal para hacer `ls`,
+    # así que la app misma reporta qué llegó al repo.
     st.error(f"No se encontraron estas vistas: {', '.join(faltantes)}")
     encontrados = sorted(p.name for p in VISTAS.glob("*.py")) if VISTAS.is_dir() else []
     st.write(f"Buscando en: `{VISTAS}`")
