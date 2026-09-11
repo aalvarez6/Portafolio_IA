@@ -1,0 +1,6 @@
+# Versiones verificadas en local. El CSS de theme.py depende de atributos
+# data-testid de Streamlit, que cambian entre versiones: no actualices
+# Streamlit sin revisar la sección 1 de theme.py.
+streamlit==1.63.0
+numpy==2.4.4
+plotly==7.0.0
