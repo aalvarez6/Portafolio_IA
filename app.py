@@ -1,7 +1,12 @@
 """
-Entrypoint. `position="hidden"` desactiva la navegación lateral de
-Streamlit: la barra superior propia (theme.nav) es la que manda.
+Entrypoint del portafolio.
+
+Las rutas se resuelven contra la ubicación de ESTE archivo, no contra el
+directorio de trabajo. En local suelen coincidir; en Streamlit Cloud no
+siempre, y ahí es donde aparece StreamlitPageNotFoundError.
 """
+
+from pathlib import Path
 
 import streamlit as st
 
@@ -12,9 +17,32 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
+RAIZ = Path(__file__).parent
+
+# Carpeta "views" y no "pages": Streamlit trata `pages/` como directorio
+# mágico de multipágina automática, que compite con st.navigation.
+VISTAS = RAIZ / "views"
+
+DEFINICION = [
+    ("inicio.py", "Inicio", "inicio", True),
+    ("ensamble.py", "Ensamble WRF", "ensamble", False),
+]
+
+faltantes = [f for f, *_ in DEFINICION if not (VISTAS / f).is_file()]
+
+if faltantes:
+    # Falla ruidosa y útil: en la nube no tienes terminal para hacer `ls`,
+    # así que la app misma reporta qué archivos llegaron al repo.
+    st.error(f"No se encontraron estas vistas: {', '.join(faltantes)}")
+    encontrados = sorted(p.name for p in VISTAS.glob("*.py")) if VISTAS.is_dir() else []
+    st.write(f"Buscando en: `{VISTAS}`")
+    st.write("Archivos presentes:", encontrados or "la carpeta no existe")
+    st.write("Contenido de la raíz:", sorted(p.name for p in RAIZ.iterdir()))
+    st.stop()
+
 paginas = [
-    st.Page("pages/inicio.py", title="Inicio", url_path="inicio", default=True),
-    st.Page("pages/ensamble.py", title="Ensamble WRF", url_path="ensamble"),
+    st.Page(VISTAS / archivo, title=titulo, url_path=url, default=por_defecto)
+    for archivo, titulo, url, por_defecto in DEFINICION
 ]
 
 st.navigation(paginas, position="hidden").run()
