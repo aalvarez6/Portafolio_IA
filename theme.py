@@ -273,6 +273,27 @@ hr, [data-testid="stMarkdownContainer"] hr {{
   border: 0; border-top: 1px solid var(--hairline); margin: 0;
 }}
 
+/* --- 7b. Índice compacto -------------------------------------------- */
+/* Segundo nivel de jerarquía: enlaces, no tarjetas. El peso visual
+   comunica la diferencia entre trabajo destacado y exploración. */
+.indice {{
+  display: grid; gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  border-top: 1px solid var(--hairline);
+}}
+.indice a {{
+  display: flex; align-items: baseline; gap: 12px;
+  padding: 15px 4px;
+  border-bottom: 1px solid var(--hairline);
+  text-decoration: none;
+  transition: padding-left .18s ease;
+}}
+.indice a:hover {{ padding-left: 10px; }}
+.indice__nombre {{ font-size: .96rem; font-weight: 500; color: var(--ink); }}
+.indice__que {{ font-size: .84rem; color: var(--ink-faint); margin-left: auto;
+               text-align: right; }}
+@media (max-width: 560px) {{ .indice__que {{ display: none; }} }}
+
 /* --- 8. Pie ----------------------------------------------------------- */
 .foot {{
   margin-top: 104px; padding-top: 28px;
@@ -334,23 +355,45 @@ def band(title: str, lead: str = "", first: bool = False) -> None:
 
 def project_grid(projects: list[dict]) -> None:
     """
-    Grilla de proyectos. Se emite en una sola inyección para que el CSS Grid
-    funcione: si cada tarjeta fuera un `st.html` aparte, Streamlit las
+    Grilla de herramientas. Se emite en una sola inyección para que el CSS
+    Grid funcione: si cada tarjeta fuera un `st.html` aparte, Streamlit las
     separaría en contenedores distintos y la grilla se rompería.
+
+    Cada entrada acepta: title, lead, href, meta (dict) y, opcional,
+    `externa=True` para abrir en pestaña nueva.
     """
     cards = []
     for p in projects:
         meta = "".join(
             f"<dt>{escape(k)}</dt><dd>{escape(v)}</dd>" for k, v in p["meta"].items()
         )
-        live = '<span class="card__live">Demo en vivo</span>' if p.get("live") else ""
+        live = '<span class="card__live">Abrir herramienta</span>' if p.get("live") else ""
+        # rel="noopener" es obligatorio con target="_blank": sin eso la
+        # pestaña destino puede manipular la de origen vía window.opener.
+        destino = (
+            ' target="_blank" rel="noopener noreferrer"' if p.get("externa") else ""
+        )
         cards.append(
-            f'<a class="card" href="{escape(p["href"])}">'
+            f'<a class="card" href="{escape(p["href"])}"{destino}>'
             f'<h3>{escape(p["title"])}</h3>'
             f'<p class="card__lead">{escape(p["lead"])}</p>'
             f'<dl class="card__meta">{meta}</dl>{live}</a>'
         )
     st.html(f'<div class="grid">{"".join(cards)}</div>')
+
+
+def link_list(items: list[dict]) -> None:
+    """
+    Índice compacto de herramientas secundarias. Una sola inyección, por la
+    misma razón que project_grid: el CSS Grid necesita un contenedor único.
+    """
+    filas = "".join(
+        f'<a href="{escape(i["href"])}" target="_blank" rel="noopener noreferrer">'
+        f'<span class="indice__nombre">{escape(i["title"])}</span>'
+        f'<span class="indice__que">{escape(i.get("que", ""))}</span></a>'
+        for i in items
+    )
+    st.html(f'<div class="indice">{filas}</div>')
 
 
 def footer(name: str, note: str, links: dict[str, str]) -> None:
