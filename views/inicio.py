@@ -1,4 +1,4 @@
-"""Portada: hero, herramientas en dos niveles, método, pie."""
+"""Portada."""
 
 import streamlit as st
 
@@ -12,35 +12,33 @@ theme.nav(content.PERFIL["nombre"], content.NAV)
 theme.hero(
     title=content.PERFIL["titular"],
     lead=content.PERFIL["lead"],
+    stack=content.PERFIL["stack"],
     figure_svg=curva_de_carga(),
     caption=content.PERFIL["pie_figura"],
 )
 
 theme.band(
-    "Herramientas",
-    "Cada una resuelve un problema distinto, tiene repositorio propio y "
-    "está desplegada y abierta.",
+    "Featured projects",
+    "Three systems, each solving a different problem. All deployed, open "
+    "and usable right now.",
 )
 theme.project_grid(content.DESTACADAS)
 
+theme.band(
+    "Capabilities",
+    "Grouped by what they are for, not listed as keywords.",
+)
+theme.capabilities(content.CAPACIDADES)
+
 if content.OTRAS:
-    # Segundo nivel: mismo contenido, menos peso visual. Evita que el
-    # trabajo destacado compita con los experimentos.
+    # Tercer nivel de jerarquía: enlaces sin tarjeta. Mantiene visible la
+    # amplitud sin que compita con los tres proyectos destacados.
     st.html(
-        "<h3 style='margin:64px 0 4px'>Otras herramientas</h3>"
+        "<h3 style='margin:96px 0 4px'>More work</h3>"
         "<p style='font-size:.94rem;margin:0 0 20px'>"
-        "Exploraciones más acotadas del ecosistema de IA aplicada.</p>"
+        "Smaller explorations across the applied AI ecosystem.</p>"
     )
     theme.link_list(content.OTRAS)
-
-theme.band("Cómo trabajo", content.METODOS["lead"])
-cols = st.columns(2, gap="large")
-for i, (titulo, detalle) in enumerate(content.METODOS["items"]):
-    with cols[i % 2]:
-        st.html(
-            f"<h3 style='margin-bottom:6px'>{titulo}</h3>"
-            f"<p style='font-size:.96rem;margin:0 0 26px'>{detalle}</p>"
-        )
 
 theme.footer(
     name=content.PERFIL["nombre"],
