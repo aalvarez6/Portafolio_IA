@@ -1,138 +1,89 @@
 """
-Contenido del sitio. Aquí editas texto y herramientas sin tocar el CSS.
+Contenido del sitio. Un solo archivo para todo el texto.
 
 =====================================================================
-AVISO: las descripciones se dedujeron del nombre de cada app, porque
-Streamlit bloquea el acceso automatizado y no se pudo verificar qué
-hace cada una. Reemplaza cada línea marcada con # VERIFICAR.
+IDIOMA: el sitio está en inglés porque tu posicionamiento profesional
+ya lo está (AI Engineer, GenAI, RAG, Agents) y porque ese es el idioma
+del mercado al que apuntas. Para pasarlo a español, solo se traducen
+las cadenas de ESTE archivo — no hay texto en ningún otro lado.
+
+VERIFICAR: las descripciones de los proyectos son deducciones; no se
+pudo abrir ninguna app. Revísalas antes de publicar.
 =====================================================================
 """
 
 PERFIL = {
     "nombre": "Alejandra Álvarez",
-    "titular": "Ingeniería eléctrica, con IA que sí se usa.",
+    "titular": "AI Engineer",
     "lead": (
-        "Ingeniera eléctrica. Construyo herramientas de inteligencia "
-        "artificial para problemas concretos de energía, datos y "
-        "automatización. Todas están desplegadas y abiertas: no son "
-        "capturas de pantalla, se pueden usar ahora mismo."
+        "Electrical engineer building artificial intelligence systems for "
+        "real problems in energy, data and automation."
     ),
-    "pie_figura": (
-        "Demanda diaria, generación solar y la carga neta resultante."
-    ),
+    "stack": "Python · GenAI · LLM · RAG · AI Agents · ML",
+    "pie_figura": "Daily demand, solar generation and the resulting net load.",
 }
 
 NAV = {
-    "Herramientas": "#herramientas",
-    "Cómo trabajo": "#cómo-trabajo",
-    "Contacto": "mailto:TU-CORREO@ejemplo.com",
+    "Projects": "#featured-projects",
+    "Capabilities": "#capabilities",
+    "Contact": "mailto:TU-CORREO@ejemplo.com",
 }
 
 
 # ---------------------------------------------------------------------
-# NIVEL 1 — Tarjeta completa. Máximo seis.
+# FEATURED PROJECTS — tres, y solo tres.
 # ---------------------------------------------------------------------
-# Criterio de selección: las que demuestran criterio de ingeniería, no
-# integración de una API. Si crees que otra merece estar aquí, cámbiala:
-# lo único que importa es que sean pocas.
 
 DESTACADAS = [
     {
-        "title": "Pronóstico de generación solar",
-        # VERIFICAR: ¿qué predice exactamente y con qué horizonte?
+        "title": "AI Data Analyst",
+        # VERIFICAR: ¿qué formatos acepta y qué devuelve exactamente?
         "lead": (
-            "Estima la generación de un sistema fotovoltaico a partir de "
-            "variables meteorológicas, para anticipar el aporte al sistema "
-            "y dimensionar el respaldo."
+            "Upload a dataset and ask questions in plain language. The agent "
+            "writes and runs the analysis, then returns both the result and "
+            "the code behind it."
         ),
         "meta": {
-            "Dominio": "Sistemas fotovoltaicos",   # VERIFICAR
-            "Entrada": "Series meteorológicas",     # VERIFICAR
-            "Salida": "Curva de generación",        # VERIFICAR
-        },
-        "href": "https://sowi-energy-forecast.streamlit.app/",
-        "externa": True,
-        "live": True,
-    },
-    {
-        "title": "Agente de análisis de datos",
-        # VERIFICAR
-        "lead": (
-            "Sube un conjunto de datos y pregúntale en lenguaje natural. "
-            "El agente escribe y ejecuta el análisis, y devuelve resultado "
-            "y código."
-        ),
-        "meta": {
-            "Modelo": "LLM con ejecución de código",
-            "Entrada": "CSV o Excel",
-            "Salida": "Análisis y gráficos",
+            "Approach": "Agent with code execution",
+            "Input": "CSV, Excel",
+            "Output": "Analysis, charts, source code",
         },
         "href": "https://dataagentt.streamlit.app/",
         "externa": True,
         "live": True,
     },
     {
-        "title": "Consulta de documentos PDF",
-        # VERIFICAR
+        "title": "RAG Document Assistant",
+        # VERIFICAR: ¿qué modelo de embeddings y qué vector store?
         "lead": (
-            "Preguntas en lenguaje natural sobre documentos largos: normas, "
-            "manuales, informes técnicos. Responde citando la fuente."
+            "Ask questions across long technical documents — standards, "
+            "manuals, reports — and get answers grounded in the source, "
+            "with the passage they came from."
         ),
         "meta": {
-            "Técnica": "RAG con búsqueda semántica",
-            "Entrada": "PDF",
-            "Salida": "Respuesta con referencia",
+            "Approach": "RAG with vector search",
+            "Input": "PDF",
+            "Output": "Answer with citation",
         },
         "href": "https://chatpdefe.streamlit.app/",
         "externa": True,
         "live": True,
     },
     {
-        "title": "Detección de objetos con YOLO",
-        # VERIFICAR: ¿detecta algo específico o es de propósito general?
+        "title": "Energy Forecasting",
+        # VERIFICAR: esta es la más importante. ¿Qué predice, con qué
+        # horizonte, con qué datos y contra qué se valida?
         "lead": (
-            "Identifica y localiza objetos en imágenes en tiempo real, con "
-            "umbral de confianza ajustable."
+            "Forecasts photovoltaic generation from meteorological inputs, "
+            "so operators can anticipate supply and size the backup they "
+            "actually need."
         ),
         "meta": {
-            "Modelo": "YOLOv5",
-            "Entrada": "Imagen o cámara",
-            "Salida": "Cajas y clases detectadas",
+            "Approach": "ML / DL on time series",
+            "Input": "Meteorological series",
+            "Output": "Generation curve",
         },
-        "href": "https://yolov55.streamlit.app/",
-        "externa": True,
-        "live": True,
-    },
-    {
-        "title": "Lectura de texto en imágenes a voz",
-        # VERIFICAR
-        "lead": (
-            "Extrae el texto de una imagen y lo convierte en audio. Pensado "
-            "para accesibilidad y para digitalizar documentos impresos."
-        ),
-        "meta": {
-            "Técnica": "OCR y síntesis de voz",
-            "Entrada": "Imagen",
-            "Salida": "Texto y audio",
-        },
-        "href": "https://ocr-audioo.streamlit.app/",
-        "externa": True,
-        "live": True,
-    },
-    {
-        "title": "Convoluciones, paso a paso",
-        # VERIFICAR: ¿es herramienta didáctica?
-        "lead": (
-            "Visualiza cómo un kernel recorre una imagen y qué produce cada "
-            "filtro. Hecho para enseñar la operación que sostiene toda la "
-            "visión por computador."
-        ),
-        "meta": {
-            "Tipo": "Herramienta didáctica",
-            "Entrada": "Imagen y kernel",
-            "Salida": "Mapa de activación",
-        },
-        "href": "https://convoluciones.streamlit.app/",
+        "href": "https://sowi-energy-forecast.streamlit.app/",
         "externa": True,
         "live": True,
     },
@@ -140,62 +91,64 @@ DESTACADAS = [
 
 
 # ---------------------------------------------------------------------
-# NIVEL 2 — Índice compacto. Sin tarjeta, solo enlace.
+# AI ENGINEERING — agrupado por función, no en lista plana.
 # ---------------------------------------------------------------------
-# "que" debe caber en 3 o 4 palabras: es una etiqueta, no una descripción.
+
+CAPACIDADES = {
+    "Generative AI": ["LLMs", "RAG", "AI Agents", "Prompt engineering"],
+    "Machine learning": ["Time series", "Computer vision", "Deep learning"],
+    "Engineering": ["Python", "FastAPI", "MCP", "REST APIs"],
+    "Delivery": ["Docker", "Cloud deployment", "CI/CD"],
+}
+
+
+# ---------------------------------------------------------------------
+# MORE WORK — índice compacto.
+# ---------------------------------------------------------------------
+# Si prefieres la versión estricta (solo tres proyectos, nada más),
+# deja esta lista vacía: la sección desaparece sola.
 
 OTRAS = [
-    {"title": "Visión por computador", "que": "Clasificación de imágenes",
+    {"title": "Object detection", "que": "YOLOv5",
+     "href": "https://yolov55.streamlit.app/"},
+    {"title": "Image OCR to speech", "que": "OCR + TTS",
+     "href": "https://ocr-audioo.streamlit.app/"},
+    {"title": "Convolution explorer", "que": "Teaching tool",
+     "href": "https://convoluciones.streamlit.app/"},
+    {"title": "Image classification", "que": "Computer vision",
      "href": "https://visionn.streamlit.app/"},                    # VERIFICAR
-    {"title": "Traductor", "que": "Traducción automática",
-     "href": "https://traductore.streamlit.app/"},
-    {"title": "Generador de texto", "que": "Generación con LLM",
-     "href": "https://textgeneratoor.streamlit.app/"},
-    {"title": "Análisis de sentimientos", "que": "Clasificación de opinión",
-     "href": "https://sentimientos-1.streamlit.app/"},
-    {"title": "Chatbot con Claude", "que": "Asistente conversacional",
+    {"title": "Claude chatbot", "que": "Anthropic API",
      "href": "https://chatbot-antropic.streamlit.app/"},
-    {"title": "Explorando la API de GPT", "que": "Banco de pruebas",
+    {"title": "GPT API sandbox", "que": "OpenAI API",
      "href": "https://chatgptexploring.streamlit.app/"},
-    {"title": "Texto a voz", "que": "Síntesis de voz",
+    {"title": "Text generation", "que": "LLM",
+     "href": "https://textgeneratoor.streamlit.app/"},
+    {"title": "Sentiment analysis", "que": "NLP",
+     "href": "https://sentimientos-1.streamlit.app/"},
+    {"title": "Machine translation", "que": "NLP",
+     "href": "https://traductore.streamlit.app/"},
+    {"title": "Text to speech", "que": "Speech synthesis",
      "href": "https://text-to-voic.streamlit.app/"},
-    {"title": "OCR", "que": "Extracción de texto",
+    {"title": "Optical character recognition", "que": "OCR",
      "href": "https://opticalcr.streamlit.app/"},
-    {"title": "Nube de palabras", "que": "Visualización de frecuencias",
+    {"title": "Word cloud", "que": "Text visualization",
      "href": "https://wordcloud-1.streamlit.app/"},
-    {"title": "Clasificador de posturas", "que": "Teachable Machine",
+    {"title": "Pose classifier", "que": "Teachable Machine",
      "href": "https://teachablem-yogi.streamlit.app/"},            # VERIFICAR
-    {"title": "TL Flores", "que": "Transfer learning",
+    {"title": "Transfer learning", "que": "Image classification",
      "href": "https://tlflores.streamlit.app/"},                   # VERIFICAR
-    # Esta app conserva el subdominio autogenerado. Renómbrala en Streamlit
-    # Cloud (Settings > General > Custom subdomain) antes de publicar.
-    {"title": "Sin nombre", "que": "Renombrar el subdominio",
+    # Subdominio autogenerado: renómbralo en Streamlit Cloud
+    # (Settings > General) o retira esta entrada.
+    {"title": "Untitled", "que": "Rename subdomain",
      "href": "https://hzwi7bwfepy6scpu7pradh.streamlit.app/"},     # VERIFICAR
 ]
 
-
-METODOS = {
-    "lead": (
-        "Cómo construyo estas herramientas. Sin esto, una demo de IA es "
-        "solo un truco que funciona una vez."
-    ),
-    "items": [
-        ("Ingeniería eléctrica",
-         "El dominio va primero: la herramienta parte del problema real, no del modelo disponible."),
-        ("Modelos",
-         "LLMs, visión por computador y aprendizaje supervisado, según lo que el problema pida."),
-        ("Producto",
-         "Python y Streamlit, con repositorio propio y despliegue continuo. Lo que no se puede abrir no existe."),
-        ("Alcance declarado",
-         "Cada herramienta dice qué asume y dónde deja de ser confiable."),
-    ],
-}
 
 PIE = {
     "nota": "Medellín, Colombia",
     "links": {
         "GitHub": "https://github.com/aalvarez6",
         "LinkedIn": "https://linkedin.com/in/TU-PERFIL",
-        "Correo": "mailto:TU-CORREO@ejemplo.com",
+        "Contact": "mailto:TU-CORREO@ejemplo.com",
     },
 }
