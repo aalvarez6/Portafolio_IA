@@ -11,7 +11,7 @@ from pathlib import Path
 import streamlit as st
 
 st.set_page_config(
-    page_title="Alejandra Álvarez · Ingeniería eléctrica e IA",
+    page_title="Alejandra Álvarez · AI Engineer",
     page_icon="◔",
     layout="wide",                    # el ancho real lo fija el CSS, no Streamlit
     initial_sidebar_state="collapsed",
