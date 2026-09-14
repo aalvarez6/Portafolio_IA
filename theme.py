@@ -191,6 +191,27 @@ p, li, [data-testid="stMarkdownContainer"] p {{
   * {{ transition: none !important; }}
 }}
 
+/* Línea de stack bajo el lead: un solo renglón, separadores medios.
+   Comunica alcance sin convertirse en nube de etiquetas. */
+.hero__stack {{
+  margin: 26px auto 0; font-size: .875rem; color: var(--ink-faint);
+  letter-spacing: .01em;
+}}
+
+/* --- 5b. Capacidades --------------------------------------------------- */
+/* Agrupadas por función, no en lista plana: el agrupamiento es la
+   información. Una fila de etiquetas sueltas no dice nada del criterio. */
+.caps {{ display: grid; gap: 0; border-top: 1px solid var(--hairline); }}
+.caps__row {{
+  display: grid; grid-template-columns: 180px 1fr; gap: 24px;
+  padding: 18px 2px; border-bottom: 1px solid var(--hairline);
+}}
+.caps__label {{ font-size: .875rem; color: var(--ink-faint); }}
+.caps__items {{ font-size: .96rem; color: var(--ink); }}
+@media (max-width: 620px) {{
+  .caps__row {{ grid-template-columns: 1fr; gap: 4px; }}
+}}
+
 /* --- 6. Tarjetas de proyecto ------------------------------------------ */
 .grid {{
   display: grid; gap: 18px;
@@ -328,17 +349,24 @@ def nav(mark: str, links: dict[str, str]) -> None:
     st.html(f'<nav class="nav"><a class="nav__mark" href="/">{escape(mark)}</a>{items}</nav>')
 
 
-def hero(title: str, lead: str, figure_svg: str = "", caption: str = "") -> None:
-    """Encabezado de portada. `figure_svg` debe ser SVG inline, no una imagen."""
+def hero(
+    title: str,
+    lead: str,
+    stack: str = "",
+    figure_svg: str = "",
+    caption: str = "",
+) -> None:
+    """Encabezado de portada. `figure_svg` debe ser SVG inline, no imagen."""
     fig = (
         f'<div class="hero__figure">{figure_svg}'
         f'<p class="hero__caption">{escape(caption)}</p></div>'
         if figure_svg
         else ""
     )
+    stack_html = f'<p class="hero__stack">{escape(stack)}</p>' if stack else ""
     st.html(
         f'<header class="hero"><h1>{escape(title)}</h1>'
-        f"<p>{escape(lead)}</p>{fig}</header>"
+        f"<p>{escape(lead)}</p>{stack_html}{fig}</header>"
     )
 
 
@@ -380,6 +408,16 @@ def project_grid(projects: list[dict]) -> None:
             f'<dl class="card__meta">{meta}</dl>{live}</a>'
         )
     st.html(f'<div class="grid">{"".join(cards)}</div>')
+
+
+def capabilities(groups: dict[str, list[str]]) -> None:
+    """Capacidades agrupadas por función. `groups` es {etiqueta: [items]}."""
+    filas = "".join(
+        f'<div class="caps__row"><div class="caps__label">{escape(label)}</div>'
+        f'<div class="caps__items">{escape(" · ".join(items))}</div></div>'
+        for label, items in groups.items()
+    )
+    st.html(f'<div class="caps">{filas}</div>')
 
 
 def link_list(items: list[dict]) -> None:
